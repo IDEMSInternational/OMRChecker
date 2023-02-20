@@ -9,6 +9,16 @@ Read OMRs fast and accurately using a scanner 🖨 or your phone 🤳.
 - [Project Ideas List](https://github.com/users/Udayraj123/projects/2/views/1)
 
 <hr />
+
+#### Usage
+
+Check alignment: `python3 main.py -i inputs/sheet_small_markers --setLayout`
+
+Grade sheets in folder: `python3 main.py -i inputs/sheet_small_markers`
+
+Grade single sheet: `python3 process.py inputs/sheet_small_markers/photos/photo1.jpg inputs/sheet_small_markers/template.json`
+
+<hr />
 <!-- [![HitCount](http://hits.dwyl.io/udayraj123/OMRchecker.svg)](http://hits.dwyl.io/udayraj123/OMRchecker) -->
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Udayraj123/OMRChecker/pull/new/master) <!-- [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg)](https://github.com/Udayraj123/OMRChecker/wiki/TODOs) -->

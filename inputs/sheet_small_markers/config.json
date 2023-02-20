@@ -1,0 +1,9 @@
+{
+    "dimensions": {
+        "display_width": 600,
+        "display_height": 800
+    },
+    "outputs": {
+        "show_image_level": 5
+    }
+}

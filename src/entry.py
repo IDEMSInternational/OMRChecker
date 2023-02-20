@@ -307,6 +307,31 @@ def process_files(
     print_stats(start_time, files_counter, tuning_config)
 
 
+def process_single_file(image_path, template_path, tuning_config=CONFIG_DEFAULTS):
+    template_exists = os.path.exists(template_path)
+    if template_exists:
+        template = Template(
+            template_path,
+            tuning_config,
+        )
+    else:
+        raise ValueError("Template path is invalid.")
+
+    in_omr = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    # The image path is only used for logging
+    in_omr = template.image_instance_ops.apply_preprocessors(
+        image_path, in_omr, template
+    )
+    response_dict, final_marked, multi_marked, _, = template.image_instance_ops.read_omr_response(
+            template, image=in_omr, name="Filename")
+    omr_response = get_concatenated_response(response_dict, template)
+    # resp_array = []
+    for k in template.output_columns:
+        print(k, omr_response[k])
+    #     resp_array.append(omr_response[k])
+    # print(resp_array)
+
+
 def print_stats(start_time, files_counter, tuning_config):
     time_checking = max(1, round(time() - start_time, 2))
     log = logger.info

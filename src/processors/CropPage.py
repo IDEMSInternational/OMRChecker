@@ -101,7 +101,8 @@ class CropPage(ImagePreprocessor):
             logger.error(
                 f"\tError: Paper boundary not found for: '{file_path}'\nHave you accidentally included CropPage preprocessor?"
             )
-            return None
+            # boundaries not found, maybe we can find the markers anyway
+            return image
 
         logger.info(f"Found page corners: \t {sheet.tolist()}")
 

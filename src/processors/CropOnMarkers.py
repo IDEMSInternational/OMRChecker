@@ -115,7 +115,7 @@ class CropOnMarkers(ImagePreprocessor):
         # Quads on warped image
         quads = {}
         h1, w1 = image_eroded_sub.shape[:2]
-        midh, midw = h1 // 3, w1 // 2
+        midh, midw = h1 // 2, w1 // 2
         origins = [[0, 0], [midw, 0], [0, midh], [midw, midh]]
         quads[0] = image_eroded_sub[0:midh, 0:midw]
         quads[1] = image_eroded_sub[0:midh, midw:w1]

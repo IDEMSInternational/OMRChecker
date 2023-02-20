@@ -1,0 +1,52 @@
+{
+  "pageDimensions": [691, 642],
+  "bubbleDimensions": [24, 24],
+  "customLabels": {},
+  "fieldBlocks": {
+    "Gender": {
+      "direction": "horizontal",
+      "bubbleValues": ["M", "F"],
+      "fieldLabels": ["Gender"],
+      "bubblesGap": 147,
+      "labelsGap": 1,
+      "origin": [310, 30]
+    },
+    "Level": {
+      "direction": "horizontal",
+      "bubbleValues": ["1", "2", "3"],
+      "fieldLabels": ["Level"],
+      "bubblesGap": 147,
+      "labelsGap": 1,
+      "origin": [310, 90]
+    },
+    "MCQBlock1": {
+      "fieldType": "QTYPE_MCQ5",
+      "fieldLabels": ["q1..10"],
+      "bubblesGap": 41,
+      "labelsGap": 43,
+      "origin": [112, 173]
+    },
+    "MCQBlock2": {
+      "fieldType": "QTYPE_MCQ5",
+      "fieldLabels": ["q11..20"],
+      "bubblesGap": 41,
+      "labelsGap": 43,
+      "origin": [452, 173]
+    }
+  },
+  "preProcessors": [
+    {
+      "name": "CropPage",
+      "options": {
+        "morphKernel": [10, 10]
+      }
+    },
+    {
+      "name": "CropOnMarkers",
+      "options": {
+        "relativePath": "omr_marker.jpg",
+        "sheetToMarkerWidthRatio": 15.3
+      }
+    }
+  ]
+}
