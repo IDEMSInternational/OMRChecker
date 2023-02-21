@@ -1,7 +1,6 @@
-scikit-build
-setuptools
-opencv-python
-opencv-contrib-python
+firebase-admin
+functions-framework==3.*
+google-cloud-storage
 deepmerge>=1.0.1
 dotmap>=1.3.30
 jsonschema>=4.16.0
@@ -10,3 +9,8 @@ matplotlib>=3.5.3
 pandas>=1.4.3
 rich>=12.6.0
 screeninfo>=0.8.1
+scikit-build
+setuptools
+opencv-python
+opencv-contrib-python
+requests

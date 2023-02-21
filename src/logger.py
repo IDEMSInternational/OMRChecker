@@ -12,6 +12,7 @@ logging.basicConfig(
     format="%(message)s",
     datefmt="[%X]",
     handlers=[RichHandler(rich_tracebacks=True)],
+    # filename='/dev/null'
 )
 
 

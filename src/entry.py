@@ -12,7 +12,9 @@ from pathlib import Path
 from time import time
 
 import cv2
+import numpy as np
 import pandas as pd
+import requests
 from rich.table import Table
 
 from src import constants
@@ -307,7 +309,59 @@ def process_files(
     print_stats(start_time, files_counter, tuning_config)
 
 
+def results_to_json(template, omr_response):
+    out = {'answers' : ['NoAnswer']*20, 'error' : ''}
+    for k in template.output_columns:
+        if not omr_response[k]:
+            answer = 'NoAnswer'
+        elif len(omr_response[k]) > 1:
+            answer = 'Invalid'
+        else:
+            answer = omr_response[k]
+            if k == 'Level':
+                answer = 'S' + answer
+        if k[0] == 'q' and k[1:].isnumeric():
+            qid = int(k[1:])-1
+            out['answers'][qid] = answer
+        else:
+            out[k] = answer
+    return out
+
+
+def process_from_memory(img, template, tuning_config=CONFIG_DEFAULTS):
+    try:
+        img = template.image_instance_ops.apply_preprocessors(
+            "Image_path", img, template
+        )
+    except:
+        return {'error' : 'Bad image: Unable to detect markers'}
+    response_dict, final_marked, multi_marked, _, = template.image_instance_ops.read_omr_response(
+            template, image=img, name="Filename")
+    omr_response = get_concatenated_response(response_dict, template)
+    return results_to_json(template, omr_response)
+
+
+def process_from_url(image_url, template_path, tuning_config=CONFIG_DEFAULTS):
+    try:
+        template = get_template(template_path, tuning_config)
+    except:
+        return {'error' : 'Internal error: Template not found.'}
+    try:
+        data = requests.get(image_url).content
+        npdata = np.asarray(bytearray(data), dtype=np.uint8)
+        img = cv2.imdecode(npdata, cv2.IMREAD_GRAYSCALE)
+    except:
+        return {'error' : 'Internal error: Invalid attachment.'}
+    return process_from_memory(img, template, tuning_config)
+
+
 def process_single_file(image_path, template_path, tuning_config=CONFIG_DEFAULTS):
+    template = get_template(template_path, tuning_config)
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    return process_from_memory(img, template, tuning_config)
+
+
+def get_template(template_path, tuning_config):
     template_exists = os.path.exists(template_path)
     if template_exists:
         template = Template(
@@ -316,20 +370,7 @@ def process_single_file(image_path, template_path, tuning_config=CONFIG_DEFAULTS
         )
     else:
         raise ValueError("Template path is invalid.")
-
-    in_omr = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    # The image path is only used for logging
-    in_omr = template.image_instance_ops.apply_preprocessors(
-        image_path, in_omr, template
-    )
-    response_dict, final_marked, multi_marked, _, = template.image_instance_ops.read_omr_response(
-            template, image=in_omr, name="Filename")
-    omr_response = get_concatenated_response(response_dict, template)
-    # resp_array = []
-    for k in template.output_columns:
-        print(k, omr_response[k])
-    #     resp_array.append(omr_response[k])
-    # print(resp_array)
+    return template
 
 
 def print_stats(start_time, files_counter, tuning_config):

@@ -9,9 +9,10 @@
 
 import argparse
 from pathlib import Path
+import uuid
+import json
 
-from src.entry import entry_point, process_single_file
-from src.logger import logger
+from src.entry import entry_point, process_single_file, process_from_url
 
 
 def parse_args():
@@ -41,4 +42,7 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    process_single_file(args.input_path, Path(args.template_path))
+    out = process_from_url(args.input_path, Path(args.template_path))
+    out['uuid'] = str(uuid.uuid4())
+    print(json.dumps(out))
+    # process_single_file(args.input_path, Path(args.template_path))

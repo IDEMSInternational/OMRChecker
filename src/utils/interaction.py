@@ -6,13 +6,15 @@ from screeninfo import get_monitors
 from src.logger import logger
 from src.utils.image import ImageUtils
 
-monitor_window = get_monitors()[0]
-
 
 @dataclass
 class ImageMetrics:
-    # TODO: Move TEXT_SIZE, etc here and find a better class name
-    window_width, window_height = monitor_window.width, monitor_window.height
+    try:
+        monitor_window = get_monitors()[0]
+        # TODO: Move TEXT_SIZE, etc here and find a better class name
+        window_width, window_height = monitor_window.width, monitor_window.height
+    except:
+        window_width, window_height = 640, 400
     # for positioning image windows
     window_x, window_y = 0, 0
     reset_pos = [0, 0]

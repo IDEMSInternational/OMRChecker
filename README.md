@@ -10,102 +10,6 @@ Read OMRs fast and accurately using a scanner 🖨 or your phone 🤳.
 
 <hr />
 
-#### Usage
-
-Check alignment: `python3 main.py -i inputs/sheet_small_markers --setLayout`
-
-Grade sheets in folder: `python3 main.py -i inputs/sheet_small_markers`
-
-Grade single sheet: `python3 process.py inputs/sheet_small_markers/photos/photo1.jpg inputs/sheet_small_markers/template.json`
-
-<hr />
-<!-- [![HitCount](http://hits.dwyl.io/udayraj123/OMRchecker.svg)](http://hits.dwyl.io/udayraj123/OMRchecker) -->
-
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Udayraj123/OMRChecker/pull/new/master) <!-- [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg)](https://github.com/Udayraj123/OMRChecker/wiki/TODOs) -->
-[![GitHub pull-requests closed](https://img.shields.io/github/issues-pr-closed/Udayraj123/OMRChecker.svg)](https://github.com/Udayraj123/OMRChecker/pulls?q=is%3Aclosed)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/Udayraj123/OMRChecker.svg)](https://GitHub.com/Udayraj123/OMRChecker/issues?q=is%3Aissue+is%3Aclosed)
-
-<!-- [![GitHub contributors](https://img.shields.io/github/contributors/Udayraj123/OMRChecker.svg)](https://GitHub.com/Udayraj123/OMRChecker/graphs/contributors/) -->
-
-[![Join](https://img.shields.io/badge/Join-Discord_group-purple.svg?style=flat-square)](https://discord.gg/qFv2Vqf)
-[![Ask me](https://img.shields.io/badge/Discuss-on_Github-purple.svg?style=flat-square)](https://github.com/Udayraj123/OMRChecker/issues/5)
-
-
-[![GitHub stars](https://img.shields.io/github/stars/Udayraj123/OMRChecker.svg?style=social&label=Stars✯)](https://GitHub.com/Udayraj123/OMRChecker/stargazers/)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FUdayraj123%2FOMRChecker&count_bg=%2379C83D&title_bg=%23555555&icon=googlecast.svg&icon_color=%23E7E7E7&title=hits%2829.09.2022%29&edge_flat=false)](https://hits.seeyoufarm.com)
-
-<!-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/Udayraj123/a125b1531c61cceed5f06994329cba66/omrchecker-on-cloud.ipynb) -->
-
-## 🎯 Features
-
-A full-fledged OMR checking software that can read and evaluate OMR sheets scanned at any angle and having any color.
-
-| Specs <img width=200/> | ![Current_Speed](https://img.shields.io/badge/Speed-200+_OMRs/min-blue.svg?style=flat-square) ![Min Resolution](https://img.shields.io/badge/Min_Resolution-640x480-blue.svg?style=flat-square) <img width=200/> |
-| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 💯 **Accurate**        | Currently nearly 100% accurate on good quality document scans; and about 90% accurate on mobile images.                                                                                                          |
-| 💪🏿 **Robust**          | Supports low resolution, xeroxed sheets. See [**Robustness**](https://github.com/Udayraj123/OMRChecker/wiki/Robustness) for more.                                                                                |
-| ⏩ **Fast**            | Current processing speed without any optimization is 200 OMRs/minute.                                                                                                                                            |
-| ✅ **Customizable**    | [Easily apply](https://github.com/Udayraj123/OMRChecker/wiki/User-Guide) to custom OMR layouts, surveys, etc.                                                                                                    |
-| 📊 **Visually Rich**   | [Get insights](https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals) to configure and debug easily.                                                                                                        |
-| 🎈 **Lightweight**     | Very minimal core code size.                                                                                                                                                                                     |
-| 🏫 **Large Scale**     | Tested on a large scale at [Technothlon](https://en.wikipedia.org/wiki/Technothlon).                                                                                                                             |
-| 👩🏿‍💻 **Dev Friendly**    | [Pylinted](http://pylint.pycqa.org/) and [Black formatted](https://github.com/psf/black) code. Also has a [developer community](https://discord.gg/qFv2Vqf) on discord.                                          |
-
-Note: For solving interesting challenges, developers can check out [**TODOs**](https://github.com/Udayraj123/OMRChecker/wiki/TODOs).
-
-See the complete guide and details at [Project Wiki](https://github.com/Udayraj123/OMRChecker/wiki/).
-
-<!-- 💁🏿‍♂️ **User Friendly** - WIP, Help by contributing! -->
-
-## 💡 What can OMRChecker do for me?
-
-Once you configure the OMR layout, just throw images of the sheets at the software; and you'll get back the marked responses in an excel sheet!
-
-Images can be taken from various angles as shown below-
-
-<p align="center">
-	<img alt="sample_input" width="400" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/sample_input.PNG">
-</p>
-
-### Code in action on images taken by scanner:
-
-<p align="center">
-	<img alt="document_scanner" height="300" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/mini_scripts/outputs/gif/document_scanner.gif">
-
-</p>
-
-### Code in action on images taken by a mobile phone:
-
-<p align="center">
-	<img alt="checking_xeroxed_mobile" height="300" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/mini_scripts/outputs/gif/checking_xeroxed_mobile.gif">
-</p>
-
-## Visuals
-
-### Processing steps
-
-See step-by-step processing of any OMR sheet:
-
-<p align="center">
-	<a href="https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals">
-		<img alt="rotation_stack" width="650" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/rotation.PNG">
-	</a>
-	<br>
-	*Note: This image is generated by the code itself!*
-</p>
-
-### Output
-
-Get a CSV sheet containing the detected responses and evaluated scores:
-
-<p align="center">
-	<a href="https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals">
-		<img alt="csv_output" width="550" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/csv_output.PNG">
-	</a>
-</p>
-
-#### There are many more visuals in the wiki. Check them out [here!](https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals)
-
 ## Getting started
 
 ![Setup Time](https://img.shields.io/badge/Setup_Time-20_min-blue.svg)
@@ -184,22 +88,13 @@ _**Note:** If you face a distutils error in pip, use `--ignore-installed` flag i
 
 <!-- Wiki should not get cloned -->
 
-### 3. Run the code
+### 3. Run basic example
 
-1. First copy and examine the sample data to know how to structure your inputs:
-   ```bash
-   cp -r ./samples/sample1 inputs/
-   # Note: you may remove previous inputs (if any) with `mv inputs/* ~/.trash`
-   # Change the number N in sampleN to see more examples
-   ```
-2. Run OMRChecker:
-   ```bash
-   python3 main.py
-   ```
+Check alignment: `python3 batch_process.py -i inputs/sheet_small_markers --setLayout`
 
-Alternatively you can also use `python3 main.py -i ./samples/sample1`.
+Grade sheets in folder: `python3 batch_process.py -i inputs/sheet_small_markers`
 
-Each example in the samples folder demonstrates different ways in which OMRChecker can be used.
+Grade single sheet: `python3 process.py inputs/sheet_small_markers/photos/photo1.jpg inputs/sheet_small_markers/template.json`
 
 ### Common Issues
 
@@ -219,6 +114,78 @@ Command: <code>python3 -m pip install --user --upgrade pip</code>
 <br>
 	Link to Solution: <a href="https://github.com/Udayraj123/OMRChecker/issues/70#issuecomment-1268094136">#70</a>
 </details>
+
+<hr />
+
+## 🎯 Features
+
+A full-fledged OMR checking software that can read and evaluate OMR sheets scanned at any angle and having any color.
+
+| Specs <img width=200/> | ![Current_Speed](https://img.shields.io/badge/Speed-200+_OMRs/min-blue.svg?style=flat-square) ![Min Resolution](https://img.shields.io/badge/Min_Resolution-640x480-blue.svg?style=flat-square) <img width=200/> |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 💯 **Accurate**        | Currently nearly 100% accurate on good quality document scans; and about 90% accurate on mobile images.                                                                                                          |
+| 💪🏿 **Robust**          | Supports low resolution, xeroxed sheets. See [**Robustness**](https://github.com/Udayraj123/OMRChecker/wiki/Robustness) for more.                                                                                |
+| ⏩ **Fast**            | Current processing speed without any optimization is 200 OMRs/minute.                                                                                                                                            |
+| ✅ **Customizable**    | [Easily apply](https://github.com/Udayraj123/OMRChecker/wiki/User-Guide) to custom OMR layouts, surveys, etc.                                                                                                    |
+| 📊 **Visually Rich**   | [Get insights](https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals) to configure and debug easily.                                                                                                        |
+| 🎈 **Lightweight**     | Very minimal core code size.                                                                                                                                                                                     |
+| 🏫 **Large Scale**     | Tested on a large scale at [Technothlon](https://en.wikipedia.org/wiki/Technothlon).                                                                                                                             |
+| 👩🏿‍💻 **Dev Friendly**    | [Pylinted](http://pylint.pycqa.org/) and [Black formatted](https://github.com/psf/black) code. Also has a [developer community](https://discord.gg/qFv2Vqf) on discord.                                          |
+
+Note: For solving interesting challenges, developers can check out [**TODOs**](https://github.com/Udayraj123/OMRChecker/wiki/TODOs).
+
+See the complete guide and details at [Project Wiki](https://github.com/Udayraj123/OMRChecker/wiki/).
+
+<!-- 💁🏿‍♂️ **User Friendly** - WIP, Help by contributing! -->
+
+## 💡 What can OMRChecker do for me?
+
+Once you configure the OMR layout, just throw images of the sheets at the software; and you'll get back the marked responses in an excel sheet!
+
+Images can be taken from various angles as shown below-
+
+<p align="center">
+	<img alt="sample_input" width="400" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/sample_input.PNG">
+</p>
+
+### Code in action on images taken by scanner:
+
+<p align="center">
+	<img alt="document_scanner" height="300" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/mini_scripts/outputs/gif/document_scanner.gif">
+
+</p>
+
+### Code in action on images taken by a mobile phone:
+
+<p align="center">
+	<img alt="checking_xeroxed_mobile" height="300" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/mini_scripts/outputs/gif/checking_xeroxed_mobile.gif">
+</p>
+
+## Visuals
+
+### Processing steps
+
+See step-by-step processing of any OMR sheet:
+
+<p align="center">
+	<a href="https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals">
+		<img alt="rotation_stack" width="650" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/rotation.PNG">
+	</a>
+	<br>
+	*Note: This image is generated by the code itself!*
+</p>
+
+### Output
+
+Get a CSV sheet containing the detected responses and evaluated scores:
+
+<p align="center">
+	<a href="https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals">
+		<img alt="csv_output" width="550" src="https://raw.githubusercontent.com/wiki/Udayraj123/OMRChecker/extras/Progress/2019-04-26/images/csv_output.PNG">
+	</a>
+</p>
+
+#### There are many more visuals in the wiki. Check them out [here!](https://github.com/Udayraj123/OMRChecker/wiki/Rich-Visuals)
 
 ## OMRChecker for custom OMR Sheets
 
