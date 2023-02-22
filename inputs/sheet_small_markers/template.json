@@ -3,7 +3,7 @@
   "bubbleDimensions": [24, 24],
   "customLabels": {},
   "fieldBlocks": {
-    "Gender": {
+    "gender": {
       "direction": "horizontal",
       "bubbleValues": ["M", "F"],
       "fieldLabels": ["Gender"],
@@ -11,7 +11,7 @@
       "labelsGap": 1,
       "origin": [310, 30]
     },
-    "Level": {
+    "level": {
       "direction": "horizontal",
       "bubbleValues": ["1", "2", "3"],
       "fieldLabels": ["Level"],

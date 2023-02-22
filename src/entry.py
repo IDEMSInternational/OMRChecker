@@ -335,11 +335,13 @@ def process_from_memory(img, template, tuning_config=CONFIG_DEFAULTS):
         )
     except:
         return {'error' : 'Bad image: Unable to detect markers'}
-    response_dict, final_marked, multi_marked, _, = template.image_instance_ops.read_omr_response(
-            template, image=img, name="Filename")
-    omr_response = get_concatenated_response(response_dict, template)
-    return results_to_json(template, omr_response)
-
+    if img is None:
+        return {'error' : 'Bad image: Unable to detect markers'}
+    else:
+        response_dict, final_marked, multi_marked, _, = template.image_instance_ops.read_omr_response(
+                template, image=img, name="Filename")
+        omr_response = get_concatenated_response(response_dict, template)
+        return results_to_json(template, omr_response)
 
 def process_from_url(image_url, template_path, tuning_config=CONFIG_DEFAULTS):
     try:

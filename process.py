@@ -42,7 +42,7 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    out = process_from_url(args.input_path, Path(args.template_path))
-    out['uuid'] = str(uuid.uuid4())
+    # out = process_from_url(args.input_path, Path(args.template_path))
+    out = process_single_file(args.input_path, Path(args.template_path))
+    # out['uuid'] = str(uuid.uuid4())
     print(json.dumps(out))
-    # process_single_file(args.input_path, Path(args.template_path))
