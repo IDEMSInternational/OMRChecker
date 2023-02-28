@@ -2,8 +2,11 @@ from firebase_admin import firestore
 import firebase_admin
 import functions_framework
 from google.cloud import storage
+from src.logger import console, logger
 
+from datetime import datetime
 import io
+import re
 import csv
 from pathlib import Path
 import uuid
@@ -68,6 +71,18 @@ def validate_submission(request_json):
     return None
 
 
+def validate_list_students(request_json):
+    required_fields = {
+        "competition_id",
+        "teacher_uuid",
+    }
+
+    for field in required_fields:
+        if field not in request_json:
+            return f'Missing {field}'
+    return None
+
+
 def write_record(data):
     # data is a dict
     db = firestore.client()
@@ -87,10 +102,12 @@ def update_record(data):
 def get_field(field, doc):
     if field in doc:
         return doc[field]
-    else:
+    elif re.match("^q[0-9]+$", field):
         # qXX
         qid = int(field[1:])-1
         return doc['answers'][qid]
+    else:
+        return ''
 
 
 def list_records(competition_id):
@@ -110,6 +127,8 @@ def list_records(competition_id):
         "district",
         "sector",
         "type_of_school",
+        "submission_timestamp",
+        "validation_timestamp",
         "teacher_uuid",
         "uuid",
         "image_url",
@@ -123,6 +142,16 @@ def list_records(competition_id):
     return output.getvalue()
 
 
+def list_teacher_students(competition_id, teacher_uuid):
+    db = firestore.client()
+    col_ref = db.collection(u'student_sheets')
+    q = col_ref.where(u'competition_id', u'==', competition_id) \
+               .where(u'validated', u'==', True) \
+               .where(u'teacher_uuid', u'==', teacher_uuid)
+    docs = q.stream()
+    return sorted([doc.to_dict()['student_name'] for doc in docs])
+
+
 def process_image(request):
     request_json = request.get_json(silent=True)
     if not request_json:
@@ -132,13 +161,11 @@ def process_image(request):
         return result, 400
     image_url = request_json['image_url']
     student_name = request_json['student_name']
-    out = process_from_url(image_url, Path("inputs/sheet_small_markers/template.json"))
+    out, data = process_from_url(image_url, Path("inputs/sheet_small_markers/template.json"))
     out['uuid'] = str(uuid.uuid4())
-    write_record(request_json | out | {'validated' : False})
-    # TODO: store image
-    # TODO: timestamps
-    # TODO: Rapidpro: safe escaping for json sending
-    # upload_blob_from_memory('competition-sheet-photos', 'file content', 'text.txt')
+    if data is not None:
+        write_record(request_json | out | {'validated' : False, 'submission_timestamp' : str(datetime.utcnow())})
+        upload_blob_from_memory('competition-sheet-photos', data, f"{out['uuid']}.jpg")
     return json.dumps(out), 200
 
 
@@ -149,7 +176,7 @@ def submit_answers(request):
     result = validate_submission(request_json)
     if result is not None:
         return result, 400
-    return update_record(request_json | {'validated' : True})
+    return update_record(request_json | {'validated' : True, 'validation_timestamp' : str(datetime.utcnow())})
 
 
 def show_records(request):
@@ -159,6 +186,20 @@ def show_records(request):
     cid = request_args['competition_id']
     out = list_records(cid)
     return out, 200
+
+
+def get_teacher_students(request):
+    request_json = request.get_json(silent=True)
+    if not request_json:
+        return 'No Data', 400
+    result = validate_list_students(request_json)
+    if result is not None:
+        return result, 400
+    out = list_teacher_students(request_json["competition_id"], request_json["teacher_uuid"])
+    return {
+        'error' : '',
+        'students' : out
+    }
 
 
 @functions_framework.http
@@ -178,6 +219,8 @@ def serve(request):
         return process_image(request)
     elif path == 'submit_answers':
         return submit_answers(request)
+    elif path == 'get_teacher_students':
+        return get_teacher_students(request)
     else:
         return show_records(request)
 

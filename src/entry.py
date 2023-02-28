@@ -347,14 +347,14 @@ def process_from_url(image_url, template_path, tuning_config=CONFIG_DEFAULTS):
     try:
         template = get_template(template_path, tuning_config)
     except:
-        return {'error' : 'Internal error: Template not found.'}
+        return {'error' : 'Internal error: Template not found.'}, None
     try:
         data = requests.get(image_url).content
         npdata = np.asarray(bytearray(data), dtype=np.uint8)
         img = cv2.imdecode(npdata, cv2.IMREAD_GRAYSCALE)
     except:
-        return {'error' : 'Internal error: Invalid attachment.'}
-    return process_from_memory(img, template, tuning_config)
+        return {'error' : 'Internal error: Invalid attachment.'}, None
+    return process_from_memory(img, template, tuning_config), data
 
 
 def process_single_file(image_path, template_path, tuning_config=CONFIG_DEFAULTS):
