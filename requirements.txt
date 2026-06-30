@@ -11,6 +11,6 @@ rich>=12.6.0
 screeninfo>=0.8.1
 scikit-build
 setuptools
-opencv-python
-opencv-contrib-python
+opencv-python-headless
+opencv-contrib-python-headless
 requests
