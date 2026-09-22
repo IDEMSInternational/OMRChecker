@@ -343,17 +343,28 @@ def process_from_memory(img, template, tuning_config=CONFIG_DEFAULTS):
         omr_response = get_concatenated_response(response_dict, template)
         return results_to_json(template, omr_response)
 
+
 def process_from_url(image_url, template_path, tuning_config=CONFIG_DEFAULTS):
     try:
         template = get_template(template_path, tuning_config)
-    except:
-        return {'error' : 'Internal error: Template not found.'}, None
+    except Exception:
+        return {"error": "Internal error: Template not found."}, None
+
+    auth = (
+        os.getenv("HTTP_BASIC_AUTH_USER"),
+        os.getenv("HTTP_BASIC_AUTH_PASS")
+    )
+
     try:
-        data = requests.get(image_url).content
+        data = requests.get(
+            image_url,
+            auth=auth if all(auth) else None,
+        ).content
         npdata = np.asarray(bytearray(data), dtype=np.uint8)
         img = cv2.imdecode(npdata, cv2.IMREAD_GRAYSCALE)
-    except:
-        return {'error' : 'Internal error: Invalid attachment.'}, None
+    except Exception:
+        return {"error": "Internal error: Invalid attachment."}, None
+
     return process_from_memory(img, template, tuning_config), data
 
 

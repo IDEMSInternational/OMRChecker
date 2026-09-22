@@ -33,8 +33,9 @@ def upload_blob_from_memory(bucket_name, contents, destination_blob_name):
     blob.upload_from_string(contents)
 
     print(
-        f"{destination_blob_name} with contents {contents} uploaded to {bucket_name}."
+        f"{destination_blob_name} ({len(contents)} bytes) uploaded to {bucket_name}."
     )
+
 
 def validate_processing(request_json):
     required_fields = {

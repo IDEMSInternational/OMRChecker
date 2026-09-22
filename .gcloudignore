@@ -19,3 +19,5 @@ batch_process.py
 process.py
 
 node_modules
+**/__pycache__
+.venv
